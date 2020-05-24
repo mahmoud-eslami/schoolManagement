@@ -131,7 +131,6 @@ DATABASES = {
       #   'OPTIONS': {
       #      'read_default_file': './my.cnf',
      #   },
-  #  }
      'default': {
              'ENGINE': 'django.db.backends.mysql',
               'NAME': 'school',
@@ -141,7 +140,6 @@ DATABASES = {
               'PORT': '3308',
     },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
