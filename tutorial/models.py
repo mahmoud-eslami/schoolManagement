@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from school.validators import *
-from django.conf import Settings
+from django.conf import settings
 
 
 pv = "0"
@@ -22,14 +22,14 @@ class Tutrial (models.Model):
     # in theis class you can upload pdf for tutorial
     id = models.AutoField(primary_key = True)
     title = models.CharField(max_length=250,blank= False , null= True)
-    content = models.CharField(max_length=250 , blank= False , null = True)
-    writer  = models.ForeignKey(Settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='author')
+    content = models.CharField(max_length=250 ,blank= False , null = True)
+    writer  = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='writer')
     ttype = models.CharField(choices= post_type_choice,max_length = 1, blank = False ,default= public)
-    tfile = models.CharField(max_length= 250 , blank= True, null = True)
+    tfile = models.CharField(max_length= 250 , blank= False, null = True)
 
 
 
 
 class file (models.Model):
-    user = models.ForeignKey(Settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     file = models.FileField(upload_to='uploads',blank=False,null=True,validators=[validate_file_size , format_file ])

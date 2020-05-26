@@ -64,7 +64,7 @@ section_choices = [
 #############################
 
 class MyUser(AbstractUser):
-    role = models.CharField(max_length=1,choices=role_choices,default=STUDENT)
+    role = models.CharField(max_length=1,choices=role_choices,default=MODERATION)
 
 class userDoc(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='doc')
@@ -78,7 +78,7 @@ class userDoc(models.Model):
     address = models.CharField(max_length=250,blank=False,null=True,)
     zipCode = models.CharField(max_length=10,blank=False,null=True)
     personalCode = models.CharField(max_length=10,blank=False,null=True,)
-    nationalCode = models.CharField(max_length=10,blank=False,null=True,unique=True) # for being unique
+    nationalCode = models.CharField(max_length=10,blank=False,null=True,unique=True)
     father_nationalCode = models.CharField(max_length=10,blank=True,null=True)
     father_name = models.CharField(max_length=40,blank=True,null=True)
     father_pNum = models.CharField(max_length=11,blank=True,null=True)
@@ -100,10 +100,10 @@ class userDoc(models.Model):
     gender = models.CharField(max_length=1,choices=gender_choices,default=MAN)
     section = models.CharField(max_length=2,choices=section_choices,default=employee)
 #========================================
-#dashtane hamzaman  ta field
     class Meta:
         unique_together = ('user','nationalCode',)
 
 class Images(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     image = models.ImageField(upload_to='uploads',blank=False,null=True,validators=[validate_image_size,])
